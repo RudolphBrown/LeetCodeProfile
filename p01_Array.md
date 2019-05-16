@@ -71,7 +71,38 @@ return [0, 1].
 
      
 
-   * Java
+#### 0011 Container With Most Water
 
-     
+![1558018542821](C:\Users\Mechrevo\AppData\Roaming\Typora\typora-user-images\1558018542821.png)
+
+给一个数组， 选中两个元素， 使其中间 "水池" 最大，返回最大值。
+
+
+
+```java
+/**
+ * 由两边向中间， 移动较短的模板， 统计最大装水量。
+ * Time Complexity O(n)
+ * Space Complexity O(1)
+ */
+
+class Solution {
+    public int maxArea(int[] height) {
+        
+        int begin = 0, end = height.length - 1;
+        int res = 0;
+        
+        while ( begin < end ) {
+            res = Math.max(res, Math.min(height[begin], height[end]) * (end - begin) );
+            
+            if ( height[begin] < height[end] )
+                begin++;
+            else
+                end--;
+        }
+        
+        return res;
+    }
+}
+```
 
