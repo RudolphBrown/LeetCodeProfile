@@ -84,3 +84,55 @@ public:
 
    
 
+#### 0028 Implement strStr()
+
+1. My sucks Java Solution
+
+```java
+class Solution {
+    public int strStr(String haystack, String needle) {
+        
+        int haystackLen = haystack.length();
+        int needleLen = needle.length();
+        
+        if (needleLen == 0)
+            return 0;
+        
+        for (int i = 0; i <= haystackLen - needleLen; i++) {
+            for ( int j = 0; j < needleLen && haystack.charAt(i + j) == needle.charAt(j); j++) {
+                if ( j + 1 == needleLen ) // needle 找到末尾并且值依然对应
+                    return i;
+            }       
+        }
+        return -1;
+    }
+}
+```
+
+2. Excellent C++  Solution
+
+一个循环明明可以控制两个指针， 为什么一定要用两个循环来控制？
+
+```c++
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        if(needle == "") return 0;
+        if(haystack == "") return -1;
+        int i = 0, j = 0;
+        while(i < haystack.size() && j < needle.size()){
+            if(haystack[i] == needle[j]){
+                ++i;
+                ++j;
+            }
+            else{
+                i = i - j + 1;
+                j = 0;
+            }
+        }
+        if(j == needle.size()) return i - j;
+        return -1;
+    }
+};
+```
+
